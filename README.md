@@ -1,78 +1,70 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Voyager Micro CRM
+ 
+version: v1.0
+ 
+Cochi CRM – Cochimetl Customer Relationship Management.
+ 
+ 
+### SET UP
+* Requirements (Already covered with Docker deployment)
+	1. Apache/2.4.27 or greater.
+	2. MySQL 5.7 or greater.
+	3. PHP/7.2.24 or greater.
+  
+* App Configuration
+    1. Add host `voyager.crm.localhost`,
+        	see [Edit hosts](https://dinahosting.com/ayuda/como-modificar-el-fichero-hosts).        	
+    2. Create `.env` file from `example.env` and set it.
+	4. Give Folder permissions:	
+	    ```
+	    sudo chown -R $USER:www-data storage;
+        chmod -R 775 storage;
+        sudo chown -R $USER:www-data bootstrap/cache;
+        chmod -R 775 bootstrap/cache;
+	    ```
+	7. Import database from `database/updates/*.sql` into `crm_root` DB
+        with `root` user, at `localhost` host, `33063` port.
+    8. Set `APP_KEY=base64:JXJSPunrAsJnWEZrwtsrSYWp29CqkgWb/9n9SXIBzT0=` at `.env`.     	
+	9. Run `composer install`.
+	10. Run `php artisan storage:link`. 
+	11. Run `php artisan migrate`. 	
+ 
+* Load Fake Data (For Development and testing)
+    1. Copy and merge content from `fake-data/public` to `storage/app/public`.
+    2. Import database from `fake-data/*.sql` into `root_cochi` DB
+            with `root` user, at `localhost` host, `33063` port.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* App Settings 
+    1. Browse [/admin/settings](http://voyager.crm.localhost/admin/settings).
+* Create Admin User	
+    Create Admin User:
+    
+    ```
+    php artisan create-admin-user --user={email-here}
+    ```
+    
+    Example:
+    ```
+    php artisan create-admin-user --user=admin@adlnetworks.com	
+    ```
+* Browse at [voyager.crm.localhost](http://voyager.crm.localhost).
+ 
+* Voyager Back Office at [voyager.crm.localhost/admin](http://voyager.crm.localhost/admin).
+ 
+### CONTRIBUTION: Guidelines & Documentation
+ 
+* Database Key Fields, tables and or values:
+ 
+	1. `users.email`: Users email.
+ 
+* Git :
+    [Gitflow](http://nvie.com/posts/a-successful-git-branching-model).
+* Back End:
+    [Laravel 6.x](https://laravel.com/docs/6.x),
+    [Laravel Voyager](https://docs.laravelvoyager.com).
+* Front End:
+    [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction),
+ 
+***
+ 
+2020 [Samuel Ramirez](https://github.com/Samvel24/)
