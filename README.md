@@ -2,7 +2,7 @@
  
 version: v1.0
  
-Cochi CRM – Cochimetl Customer Relationship Management.
+Voyager Micro CRM (CRM == Customer Relationship Management) (Micro CRM usando las tecnologias laravel y laravel-voyager)
  
  
 ### SET UP
