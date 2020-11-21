@@ -1,0 +1,5 @@
+año, mes, dia, hora, minuto
+
+ver video: "Meet - ehr-ghxj-ckf - Google Chrome 2020-11-14 09-57-51" en minuto 20:40
+           "cada vez que haga cambios sobre mi base de datos se recomienda agregar esos cambios sobre archivos .sql
+            y gaurdarlos en la ruta: nombreProyectoLaravel\database\updates"; si la carpeta upadates no existe, crearla.
