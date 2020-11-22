@@ -28,11 +28,6 @@ Voyager Micro CRM (CRM == Customer Relationship Management) (Micro CRM usando la
 	9. Run `composer install`.
 	10. Run `php artisan storage:link`. 
 	11. Run `php artisan migrate`. 	
- 
-* Load Fake Data (For Development and testing)
-    1. Copy and merge content from `fake-data/public` to `storage/app/public`.
-    2. Import database from `fake-data/*.sql` into `root_cochi` DB
-            with `root` user, at `localhost` host, `33063` port.
 
 * App Settings 
     1. Browse [/admin/settings](http://voyager.crm.localhost/admin/settings).
