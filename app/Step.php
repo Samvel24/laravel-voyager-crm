@@ -8,4 +8,5 @@ class Step extends Model
 {
     //
     public $timestamps = false;
+    protected $fillable = ['key', 'value'];
 }
