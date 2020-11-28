@@ -8,6 +8,17 @@ use App\Step;
 class StepController extends Controller
 {
     /**
+     * @OA\Get(path="/api/steps/",
+     *   tags={"Step"},
+     *   summary="Show Steps",
+     *   description="Returns list of all Steps",
+     *   @OA\Response(
+     *         response=200,
+     *         description="Mostrar Steps"
+     *     )
+     * )
+     */
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -15,6 +26,7 @@ class StepController extends Controller
     public function index()
     {
         //
+        return Step::all(); // returns list of Steps
     }
 
     /**
@@ -84,11 +96,11 @@ class StepController extends Controller
      *   description="Returns Step by ID",
      *   @OA\Parameter(
      *     name="id",
-     *     in="query",
+     *     in="path",
      *     description="Put existing step ID",
      *     required=true,
      *     @OA\Schema(
-     *         type="int",
+     *         type="integer",
      *         example=7
      *     )
      *   ),
@@ -149,11 +161,11 @@ class StepController extends Controller
      *   ),
      *   @OA\Parameter(
      *     name="id",
-     *     in="query",
+     *     in="path",
      *     description="Put existing Step ID",
      *     required=true,
      *     @OA\Schema(
-     *         type="int",
+     *         type="integer",
      *         example=7
      *     )
      *   ),
@@ -189,11 +201,11 @@ class StepController extends Controller
      *   description="Delete Step",
      *   @OA\Parameter(
      *     name="id",
-     *     in="query",
+     *     in="path",
      *     description="Put existing Step ID",
      *     required=true,
      *     @OA\Schema(
-     *         type="int",
+     *         type="integer",
      *         example=7
      *     )
      *   ),
