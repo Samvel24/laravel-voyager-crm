@@ -10,6 +10,20 @@
         }
     ],
     "paths": {
+        "/api/leads/": {
+            "get": {
+                "tags": [
+                    "Lead"
+                ],
+                "summary": "Show Leads",
+                "description": "Returns list of all Leads",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar Leads"
+                    }
+                }
+            }
+        },
         "/api/leads": {
             "post": {
                 "tags": [
@@ -77,11 +91,11 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "description": "Put existing Lead ID",
                         "required": true,
                         "schema": {
-                            "type": "int",
+                            "type": "integer",
                             "example": 12
                         }
                     }
@@ -101,11 +115,11 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "description": "Put existing Lead ID",
                         "required": true,
                         "schema": {
-                            "type": "int",
+                            "type": "integer",
                             "example": 12
                         }
                     }
@@ -168,11 +182,11 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "description": "Put existing Lead ID",
                         "required": true,
                         "schema": {
-                            "type": "int",
+                            "type": "integer",
                             "example": 12
                         }
                     }
@@ -180,6 +194,20 @@
                 "responses": {
                     "200": {
                         "description": "Se borra Lead en base de datos"
+                    }
+                }
+            }
+        },
+        "/api/steps/": {
+            "get": {
+                "tags": [
+                    "Step"
+                ],
+                "summary": "Show Steps",
+                "description": "Returns list of all Steps",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar Steps"
                     }
                 }
             }
@@ -233,12 +261,12 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "description": "Put existing step ID",
                         "required": true,
                         "schema": {
-                            "type": "int",
-                            "example": 6
+                            "type": "integer",
+                            "example": 7
                         }
                     }
                 ],
@@ -257,12 +285,12 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "description": "Put existing Step ID",
                         "required": true,
                         "schema": {
-                            "type": "int",
-                            "example": 1
+                            "type": "integer",
+                            "example": 7
                         }
                     }
                 ],
@@ -306,12 +334,12 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "description": "Put existing Step ID",
                         "required": true,
                         "schema": {
-                            "type": "int",
-                            "example": 1
+                            "type": "integer",
+                            "example": 7
                         }
                     }
                 ],
