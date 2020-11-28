@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Lead;
 
+/**
+* @OA\Info(title="Voyager CRM", version="1.0")
+*
+* @OA\Server(url="http://voyager.crm.localhost")
+*/
+
 class LeadController extends Controller
 {
     /**
@@ -28,6 +34,58 @@ class LeadController extends Controller
     }
 
     /**
+     * @OA\Post(path="/api/leads",
+     *   tags={"Lead"},
+     *   summary="Store",
+     *   description="Store Lead",
+     *   @OA\RequestBody(
+     *       required=true,
+     *       description="Lead Store body",
+     *       @OA\JsonContent(
+     *            @OA\Property(
+     *              property="name",
+     *              title="Lead Name",
+     *              description="Lead Name",
+     *              type="string",
+     *              example="Pedro"
+     *            ),
+     *            @OA\Property(
+     *              property="email",
+     *              title="Lead email",
+     *              description="Lead email",
+     *              type="string",
+     *              example="pedro@ejemplo1.com"
+     *            ),
+     *            @OA\Property(
+     *              property="phone",
+     *              title=" Lead phone",
+     *              description="Lead phone",
+     *              type="string",
+     *              example="1233567"
+     *            ),
+     *            @OA\Property(
+     *              property="message",
+     *              title="Message for Lead",
+     *              description="Message for Lead",
+     *              type="string",
+     *              example="Hello Pedro"
+     *            ),
+     *            @OA\Property(
+     *              property="step_id",
+     *              title="Step ID for Lead",
+     *              description="Step ID for Lead",
+     *              type="int",
+     *              example=3
+     *            )  
+     *       )
+     *   ),
+     *   @OA\Response(
+     *         response=200,
+     *         description="Se guarda Lead en base de datos"
+     *   )
+     * )
+     */
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -49,6 +107,27 @@ class LeadController extends Controller
         $lead->save();
     }
 
+    /**
+     * @OA\Get(path="/api/leads/{id}",
+     *   tags={"Lead"},
+     *   summary="Show",
+     *   description="Returns Lead by ID",
+     *   @OA\Parameter(
+     *     name="id",
+     *     in="query",
+     *     description="Put existing Lead ID",
+     *     required=true,
+     *     @OA\Schema(
+     *         type="int",
+     *         example=12
+     *     )
+     *   ),
+     *   @OA\Response(
+     *         response=200,
+     *         description="Mostrar Lead"
+     *     )
+     * )
+     */
     /**
      * Display the specified resource.
      *
@@ -74,6 +153,68 @@ class LeadController extends Controller
     }
 
     /**
+     * @OA\Put(path="/api/leads/{id}",
+     *   tags={"Lead"},
+     *   summary="Update",
+     *   description="Update Lead",
+     *   @OA\RequestBody(
+     *       required=true,
+     *       description="Lead Store",
+     *       @OA\JsonContent(
+     *            @OA\Property(
+     *              property="name",
+     *              title="Lead Name",
+     *              description="Lead Name",
+     *              type="string",
+     *              example="Pedro"
+     *            ),
+     *            @OA\Property(
+     *              property="email",
+     *              title="Lead email",
+     *              description="Lead email",
+     *              type="string",
+     *              example="pedro_rmg@ejemplo1.com"
+     *            ),
+     *            @OA\Property(
+     *              property="phone",
+     *              title=" Lead phone",
+     *              description="Lead phone",
+     *              type="string",
+     *              example="1233567"
+     *            ),
+     *            @OA\Property(
+     *              property="message",
+     *              title="Message for Lead",
+     *              description="Message for Lead",
+     *              type="string",
+     *              example="Hello Pedro"
+     *            ),
+     *            @OA\Property(
+     *              property="step_id",
+     *              title="Step ID for Lead",
+     *              description="Step ID for Lead",
+     *              type="int",
+     *              example=1
+     *            )  
+     *       )
+     *   ),
+     *   @OA\Parameter(
+     *     name="id",
+     *     in="query",
+     *     description="Put existing Lead ID",
+     *     required=true,
+     *     @OA\Schema(
+     *         type="int",
+     *         example=12
+     *     )
+     *   ),
+     *   @OA\Response(
+     *         response=200,
+     *         description="Se actualiza Lead en base de datos"
+     *     )
+     * )
+     */
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -95,6 +236,27 @@ class LeadController extends Controller
         }
     }
 
+    /**
+     * @OA\Delete(path="/api/leads/{id}",
+     *   tags={"Lead"},
+     *   summary="Delete",
+     *   description="Delete Lead",
+     *   @OA\Parameter(
+     *     name="id",
+     *     in="query",
+     *     description="Put existing Lead ID",
+     *     required=true,
+     *     @OA\Schema(
+     *         type="int",
+     *         example=12
+     *     )
+     *   ),
+     *   @OA\Response(
+     *         response=200,
+     *         description="Se borra Lead en base de datos"
+     *     )
+     * )
+     */
     /**
      * Remove the specified resource from storage.
      *

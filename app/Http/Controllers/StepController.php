@@ -28,6 +28,37 @@ class StepController extends Controller
     }
 
     /**
+     * @OA\Post(path="/api/steps",
+     *   tags={"Step"},
+     *   summary="Store",
+     *   description="Store Step",
+     *   @OA\RequestBody(
+     *       required=true,
+     *       description="Store Step body",
+     *       @OA\JsonContent(
+     *            @OA\Property(
+     *              property="key",
+     *              title="Step Key",
+     *              description="Step Key",
+     *              type="string",
+     *              example="abierto"
+     *            ),
+     *            @OA\Property(
+     *              property="value",
+     *              title="Step Value",
+     *              description="Step Value",
+     *              type="string",
+     *              example="Abierto"
+     *            ), 
+     *       )
+     *   ),
+     *   @OA\Response(
+     *         response=200,
+     *         description="Se guarda Step en base de datos"
+     *   )
+     * )
+     */
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -46,6 +77,27 @@ class StepController extends Controller
         $step->save();
     }
 
+    /**
+     * @OA\Get(path="/api/steps/{id}",
+     *   tags={"Step"},
+     *   summary="Show",
+     *   description="Returns Step by ID",
+     *   @OA\Parameter(
+     *     name="id",
+     *     in="query",
+     *     description="Put existing step ID",
+     *     required=true,
+     *     @OA\Schema(
+     *         type="int",
+     *         example=7
+     *     )
+     *   ),
+     *   @OA\Response(
+     *         response=200,
+     *         description="Mostrar Step"
+     *     )
+     * )
+     */
     /**
      * Display the specified resource.
      *
@@ -71,6 +123,47 @@ class StepController extends Controller
     }
 
     /**
+     * @OA\Put(path="/api/steps/{id}",
+     *   tags={"Step"},
+     *   summary="Update",
+     *   description="Update Step",
+     *   @OA\RequestBody(
+     *       required=true,
+     *       description="Store Step body",
+     *      @OA\JsonContent(
+     *          @OA\Property(
+     *              property="key",
+     *              title="Step Key",
+     *              description="Step Key",
+     *              type="string",
+     *              example="abierto_"
+     *          ),
+     *          @OA\Property(
+     *              property="value",
+     *              title="Step Value",
+     *              description="Step Value",
+     *              type="string",
+     *              example="Abierto_"
+     *          ) 
+     *      )
+     *   ),
+     *   @OA\Parameter(
+     *     name="id",
+     *     in="query",
+     *     description="Put existing Step ID",
+     *     required=true,
+     *     @OA\Schema(
+     *         type="int",
+     *         example=7
+     *     )
+     *   ),
+     *   @OA\Response(
+     *         response=200,
+     *         description="Se actualiza Step en base de datos"
+     *     )
+     * )
+     */
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -89,6 +182,27 @@ class StepController extends Controller
         }
     }
 
+    /**
+     * @OA\Delete(path="/api/steps/{id}",
+     *   tags={"Step"},
+     *   summary="Delete",
+     *   description="Delete Step",
+     *   @OA\Parameter(
+     *     name="id",
+     *     in="query",
+     *     description="Put existing Step ID",
+     *     required=true,
+     *     @OA\Schema(
+     *         type="int",
+     *         example=7
+     *     )
+     *   ),
+     *   @OA\Response(
+     *         response=200,
+     *         description="Se borra Step en base de datos"
+     *     )
+     * )
+     */
     /**
      * Remove the specified resource from storage.
      *

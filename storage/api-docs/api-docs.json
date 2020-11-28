@@ -1,0 +1,326 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Voyager CRM",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://voyager.crm.localhost"
+        }
+    ],
+    "paths": {
+        "/api/leads": {
+            "post": {
+                "tags": [
+                    "Lead"
+                ],
+                "summary": "Store",
+                "description": "Store Lead",
+                "requestBody": {
+                    "description": "Lead Store body",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "title": "Lead Name",
+                                        "description": "Lead Name",
+                                        "type": "string",
+                                        "example": "Pedro"
+                                    },
+                                    "email": {
+                                        "title": "Lead email",
+                                        "description": "Lead email",
+                                        "type": "string",
+                                        "example": "pedro@ejemplo1.com"
+                                    },
+                                    "phone": {
+                                        "title": " Lead phone",
+                                        "description": "Lead phone",
+                                        "type": "string",
+                                        "example": "1233567"
+                                    },
+                                    "message": {
+                                        "title": "Message for Lead",
+                                        "description": "Message for Lead",
+                                        "type": "string",
+                                        "example": "Hello Pedro"
+                                    },
+                                    "step_id": {
+                                        "title": "Step ID for Lead",
+                                        "description": "Step ID for Lead",
+                                        "type": "int",
+                                        "example": 3
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Se guarda Lead en base de datos"
+                    }
+                }
+            }
+        },
+        "/api/leads/{id}": {
+            "get": {
+                "tags": [
+                    "Lead"
+                ],
+                "summary": "Show",
+                "description": "Returns Lead by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Put existing Lead ID",
+                        "required": true,
+                        "schema": {
+                            "type": "int",
+                            "example": 12
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar Lead"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Lead"
+                ],
+                "summary": "Update",
+                "description": "Update Lead",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Put existing Lead ID",
+                        "required": true,
+                        "schema": {
+                            "type": "int",
+                            "example": 12
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Lead Store",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "title": "Lead Name",
+                                        "description": "Lead Name",
+                                        "type": "string",
+                                        "example": "Pedro"
+                                    },
+                                    "email": {
+                                        "title": "Lead email",
+                                        "description": "Lead email",
+                                        "type": "string",
+                                        "example": "pedro_rmg@ejemplo1.com"
+                                    },
+                                    "phone": {
+                                        "title": " Lead phone",
+                                        "description": "Lead phone",
+                                        "type": "string",
+                                        "example": "1233567"
+                                    },
+                                    "message": {
+                                        "title": "Message for Lead",
+                                        "description": "Message for Lead",
+                                        "type": "string",
+                                        "example": "Hello Pedro"
+                                    },
+                                    "step_id": {
+                                        "title": "Step ID for Lead",
+                                        "description": "Step ID for Lead",
+                                        "type": "int",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Se actualiza Lead en base de datos"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Lead"
+                ],
+                "summary": "Delete",
+                "description": "Delete Lead",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Put existing Lead ID",
+                        "required": true,
+                        "schema": {
+                            "type": "int",
+                            "example": 12
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Se borra Lead en base de datos"
+                    }
+                }
+            }
+        },
+        "/api/steps": {
+            "post": {
+                "tags": [
+                    "Step"
+                ],
+                "summary": "Store",
+                "description": "Store Step",
+                "requestBody": {
+                    "description": "Store Step body",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "key": {
+                                        "title": "Step Key",
+                                        "description": "Step Key",
+                                        "type": "string",
+                                        "example": "abierto"
+                                    },
+                                    "value": {
+                                        "title": "Step Value",
+                                        "description": "Step Value",
+                                        "type": "string",
+                                        "example": "Abierto"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Se guarda Step en base de datos"
+                    }
+                }
+            }
+        },
+        "/api/steps/{id}": {
+            "get": {
+                "tags": [
+                    "Step"
+                ],
+                "summary": "Show",
+                "description": "Returns Step by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Put existing step ID",
+                        "required": true,
+                        "schema": {
+                            "type": "int",
+                            "example": 6
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar Step"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Step"
+                ],
+                "summary": "Update",
+                "description": "Update Step",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Put existing Step ID",
+                        "required": true,
+                        "schema": {
+                            "type": "int",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Store Step body",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "key": {
+                                        "title": "Step Key",
+                                        "description": "Step Key",
+                                        "type": "string",
+                                        "example": "abierto_"
+                                    },
+                                    "value": {
+                                        "title": "Step Value",
+                                        "description": "Step Value",
+                                        "type": "string",
+                                        "example": "Abierto_"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Se actualiza Step en base de datos"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Step"
+                ],
+                "summary": "Delete",
+                "description": "Delete Step",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Put existing Step ID",
+                        "required": true,
+                        "schema": {
+                            "type": "int",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Se borra Step en base de datos"
+                    }
+                }
+            }
+        }
+    }
+}
