@@ -14,20 +14,21 @@ Voyager Micro CRM (CRM == Customer Relationship Management) (Micro CRM usando la
 * App Configuration
     1. Add host `voyager.crm.localhost`,
         	see [Edit hosts](https://dinahosting.com/ayuda/como-modificar-el-fichero-hosts).        	
-    2. Create `.env` file from `example.env` and set it.
-	4. Give Folder permissions:	
+    2. Create `.env` file from `.env.example` and set it.
+	3. Give Folder permissions:	
 	    ```
 	    sudo chown -R $USER:www-data storage;
         chmod -R 775 storage;
         sudo chown -R $USER:www-data bootstrap/cache;
         chmod -R 775 bootstrap/cache;
 	    ```
-	7. Import database from `database/updates/*.sql` into `crm_root` DB
+	4. Import database from `database/updates/*.sql` into `crm_root` DB
         with `root` user, at `localhost` host, `33063` port.
-    8. Set `APP_KEY=base64:JXJSPunrAsJnWEZrwtsrSYWp29CqkgWb/9n9SXIBzT0=` at `.env`.     	
-	9. Run `composer install`.
-	10. Run `php artisan storage:link`. 
-	11. Run `php artisan migrate`. 	
+    5. Set `APP_KEY=base64:JXJSPunrAsJnWEZrwtsrSYWp29CqkgWb/9n9SXIBzT0=` at `.env`.
+    6. Set `DB_DATABASE=crm_root` at `.env`.     	
+	7. Run `composer install`.
+	8. Run `php artisan storage:link`. 
+	9. Run `php artisan migrate`. 	
 
 * App Settings 
     1. Browse [/admin/settings](http://voyager.crm.localhost/admin/settings).
