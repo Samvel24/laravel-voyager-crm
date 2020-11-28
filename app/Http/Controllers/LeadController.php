@@ -14,6 +14,17 @@ use App\Lead;
 class LeadController extends Controller
 {
     /**
+     * @OA\Get(path="/api/leads/",
+     *   tags={"Lead"},
+     *   summary="Show Leads",
+     *   description="Returns list of all Leads",
+     *   @OA\Response(
+     *         response=200,
+     *         description="Mostrar Leads"
+     *     )
+     * )
+     */
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -21,6 +32,7 @@ class LeadController extends Controller
     public function index()
     {
         //
+        return Lead::all(); // returns list of Leads
     }
 
     /**
@@ -114,11 +126,11 @@ class LeadController extends Controller
      *   description="Returns Lead by ID",
      *   @OA\Parameter(
      *     name="id",
-     *     in="query",
+     *     in="path",
      *     description="Put existing Lead ID",
      *     required=true,
      *     @OA\Schema(
-     *         type="int",
+     *         type="integer",
      *         example=12
      *     )
      *   ),
@@ -200,11 +212,11 @@ class LeadController extends Controller
      *   ),
      *   @OA\Parameter(
      *     name="id",
-     *     in="query",
+     *     in="path",
      *     description="Put existing Lead ID",
      *     required=true,
      *     @OA\Schema(
-     *         type="int",
+     *         type="integer",
      *         example=12
      *     )
      *   ),
@@ -243,11 +255,11 @@ class LeadController extends Controller
      *   description="Delete Lead",
      *   @OA\Parameter(
      *     name="id",
-     *     in="query",
+     *     in="path",
      *     description="Put existing Lead ID",
      *     required=true,
      *     @OA\Schema(
-     *         type="int",
+     *         type="integer",
      *         example=12
      *     )
      *   ),
