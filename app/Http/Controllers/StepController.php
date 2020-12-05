@@ -15,7 +15,15 @@ class StepController extends Controller
      *   @OA\Response(
      *         response=200,
      *         description="Mostrar Steps"
-     *     )
+     *   ),
+     *   @OA\Response(
+     *         response=404,
+     *         description="Not found."
+     *   ),
+     *   @OA\Response(
+     *         response=500,
+     *         description="CRM failure."
+     *   )
      * )
      */
     /**
@@ -46,27 +54,23 @@ class StepController extends Controller
      *   description="Store Step",
      *   @OA\RequestBody(
      *       required=true,
-     *       description="Store Step body",
-     *       @OA\JsonContent(
-     *            @OA\Property(
-     *              property="key",
-     *              title="Step Key",
-     *              description="Step Key",
-     *              type="string",
-     *              example="abierto"
-     *            ),
-     *            @OA\Property(
-     *              property="value",
-     *              title="Step Value",
-     *              description="Step Value",
-     *              type="string",
-     *              example="Abierto"
-     *            ), 
-     *       )
+     *       description="Step information",
+     *       @OA\JsonContent(ref="#/components/schemas/Step")
      *   ),
      *   @OA\Response(
      *         response=200,
-     *         description="Se guarda Step en base de datos"
+     *         description="Successful operation.",
+     *         @OA\JsonContent(
+     *                  ref="#/components/schemas/Step"
+     *         )
+     *   ),
+     *   @OA\Response(
+     *         response=404,
+     *         description="Not found."
+     *   ),
+     *   @OA\Response(
+     *         response=500,
+     *         description="CRM failure."
      *   )
      * )
      */
@@ -79,7 +83,23 @@ class StepController extends Controller
     public function store(Request $request)
     {
         //
-        //Instanciamos la clase Lead
+        // creamos la reglas de validacion
+        $rules = [
+            'key' => ['required' , 'string', 'min:7', 'max:20'],
+            'value' =>  ['required', 'string', 'min:7', 'max:20']
+        ];
+
+        // ejecutamos el validador, en caso de que falle devolvemos la respuesta
+        $validator = \Validator::make($request->all(), $rules);
+        if ($validator->fails())
+        {
+            return [
+                'created' => false,
+                'errors'  => $validator->errors()->all()
+            ];
+        }
+
+        //Instanciamos la clase Step
         $step = new Step();
         //Declaramos el nombre con el nombre enviado en el request
         $step->key = $request->key;
@@ -87,6 +107,8 @@ class StepController extends Controller
         $step->value = $request->value;
         //Guardamos el cambio en nuestro modelo
         $step->save();
+
+        return Step::where('id', $id)->get();
     }
 
     /**
@@ -106,8 +128,19 @@ class StepController extends Controller
      *   ),
      *   @OA\Response(
      *         response=200,
-     *         description="Mostrar Step"
-     *     )
+     *         description="Successful operation.",
+     *         @OA\JsonContent(
+     *                  ref="#/components/schemas/Step"
+     *         )
+     *   ),
+     *   @OA\Response(
+     *         response=404,
+     *         description="Not found."
+     *   ),
+     *   @OA\Response(
+     *         response=500,
+     *         description="CRM failure."
+     *   )
      * )
      */
     /**
@@ -120,7 +153,14 @@ class StepController extends Controller
     {
         //
         //Solicitamos al modelo el Step con el id solicitado por GET.
-        return Step::where('id', $id)->get();
+        if(!Step::where('id', $id)->exists()) // si NO existe el Step con el $id dado
+        {
+            return response()->json(['error' => 'Given Step ID Not Found!'], 404);
+        }
+        else
+        {
+            return Step::where('id', $id)->get();
+        }
     }
 
     /**
@@ -142,22 +182,7 @@ class StepController extends Controller
      *   @OA\RequestBody(
      *       required=true,
      *       description="Store Step body",
-     *      @OA\JsonContent(
-     *          @OA\Property(
-     *              property="key",
-     *              title="Step Key",
-     *              description="Step Key",
-     *              type="string",
-     *              example="abierto_"
-     *          ),
-     *          @OA\Property(
-     *              property="value",
-     *              title="Step Value",
-     *              description="Step Value",
-     *              type="string",
-     *              example="Abierto_"
-     *          ) 
-     *      )
+     *      @OA\JsonContent(ref="#/components/schemas/Step")
      *   ),
      *   @OA\Parameter(
      *     name="id",
@@ -171,8 +196,19 @@ class StepController extends Controller
      *   ),
      *   @OA\Response(
      *         response=200,
-     *         description="Se actualiza Step en base de datos"
-     *     )
+     *         description="Successful operation.",
+     *         @OA\JsonContent(
+     *                   ref="#/components/schemas/Step"
+     *         )
+     *   ),
+     *   @OA\Response(
+     *         response=404,
+     *         description="Not found."
+     *   ),
+     *   @OA\Response(
+     *         response=500,
+     *         description="CRM failure."
+     *   )
      * )
      */
     /**
@@ -185,12 +221,34 @@ class StepController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // creamos la reglas de validacion
+        $rules = [
+            'key' => ['required' , 'string', 'min:7', 'max:20'],
+            'value' =>  ['required', 'string', 'min:7', 'max:20']
+        ];
+
+        // ejecutamos el validador, en caso de que falle devolvemos la respuesta
+        $validator = \Validator::make($request->all(), $rules);
+        if ($validator->fails())
+        {
+            return [
+                'updated' => false,
+                'errors'  => $validator->errors()->all()
+            ];
+        }
+
         if(Step::where('id', $id)->exists()) // si existe el Step con el $id dado
         {
             $step = Step::find($id);
             $step->key = $request->key; // entonces modificar datos
             $step->value = $request->value;
             $step->save();
+
+            return Step::where('id', $id)->get();
+        }
+        else
+        {
+            return response()->json(['error' => 'Given Step ID Not Found!'], 404);
         }
     }
 
@@ -211,8 +269,16 @@ class StepController extends Controller
      *   ),
      *   @OA\Response(
      *         response=200,
-     *         description="Se borra Step en base de datos"
-     *     )
+     *         description="Successful operation."
+     *   ),
+     *   @OA\Response(
+     *         response=404,
+     *         description="Not found."
+     *   ),
+     *   @OA\Response(
+     *         response=500,
+     *         description="CRM failure."
+     *   )
      * )
      */
     /**
@@ -224,9 +290,14 @@ class StepController extends Controller
     public function destroy($id)
     {
         //
-        if(Step::where('id', $id)->exists()) // si existe el Lead con el $id dado
+        if(Step::where('id', $id)->exists()) // si existe el Step con el $id dado
         {
             Step::where('id', $id)->delete();
+            return response()->json(['success' => 'Step successfully deleted!'], 200);
+        }
+        else
+        {
+            return response()->json(['error' => 'Given Step ID Not Found!'], 404);
         }
     }
 }
