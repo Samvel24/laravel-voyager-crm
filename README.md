@@ -1,6 +1,6 @@
 # Voyager Micro CRM
  
-version: v1.0
+version: v1.2.4
  
 Voyager Micro CRM (CRM == Customer Relationship Management) (Micro CRM usando las tecnologias laravel y laravel-voyager)
  
