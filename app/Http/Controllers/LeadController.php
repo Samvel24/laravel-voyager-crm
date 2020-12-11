@@ -67,8 +67,8 @@ class LeadController extends Controller
      *       @OA\JsonContent(ref="#/components/schemas/Lead")
      *   ),
      *   @OA\Response(
-     *         response=200,
-     *         description="Successful operation.",
+     *         response=201,
+     *         description="Successful operation, new Lead has been created",
      *         @OA\JsonContent(
      *                  ref="#/components/schemas/Lead"
      *         )
@@ -123,7 +123,7 @@ class LeadController extends Controller
         //Guardamos el cambio en nuestro modelo
         $lead->save();
 
-        return Lead::where('id', $id)->get();
+        return $lead;
     }
 
     /**

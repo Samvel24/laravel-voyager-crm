@@ -58,8 +58,8 @@ class StepController extends Controller
      *       @OA\JsonContent(ref="#/components/schemas/Step")
      *   ),
      *   @OA\Response(
-     *         response=200,
-     *         description="Successful operation.",
+     *         response=201,
+     *         description="Successful operation, new Step has been created",
      *         @OA\JsonContent(
      *                  ref="#/components/schemas/Step"
      *         )
@@ -108,7 +108,7 @@ class StepController extends Controller
         //Guardamos el cambio en nuestro modelo
         $step->save();
 
-        return Step::where('id', $id)->get();
+        return $step;
     }
 
     /**
