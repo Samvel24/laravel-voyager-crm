@@ -1,9 +1,10 @@
 <?php
-
+    
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Lead;
+use App\Step;
 
 /**
 * @OA\Info(title="Voyager CRM", version="1.0")
@@ -50,7 +51,9 @@ class LeadController extends Controller
      */
     public function create()
     {
-        //
+        $steps = Step::All(); // consultamos todos los Step
+        // Ahora, a la vista 'register' (register.blade.php) le mandamos un arreglo (asociativo) con todos los steps
+        return view('register', ['steps' => $steps]);
     }
 
     /**
@@ -317,5 +320,41 @@ class LeadController extends Controller
         {
             return response()->json(['error' => 'Given Lead ID Not Found!'], 404);
         }
+    }
+
+    public function storeByForm(Request $request)
+    {
+        // creamos la reglas de validacion
+        $rules = [
+            'name' => ['required' , 'string', 'min:3', 'max:30'],
+            'email' =>  ['required', 'string', 'email'],
+            'phone' => ['required', 'string', 'min:5', 'max:10'],
+            'message' => ['required', 'string', 'min:5', 'max:255'],
+            'step_id' => ['required', 'integer', 'min:1']
+        ];
+
+        // ejecutamos el validador, en caso de que falle devolvemos la respuesta
+        $validator = \Validator::make($request->all(), $rules);
+        if ($validator->fails())
+        {
+            return [
+                'created' => false,
+                'errors'  => $validator->errors()->all()
+            ];
+        }
+
+        //Instanciamos la clase Lead
+        $lead = new Lead();
+        //Declaramos el nombre con el nombre enviado en el request
+        $lead->name = $request->name;
+        // lo mismo para los demas campos de la tabla leads:
+        $lead->email = $request->email;
+        $lead->phone = $request->phone;
+        $lead->message = $request->message;
+        $lead->step_id = $request->step_id;
+        //Guardamos el cambio en nuestro modelo
+        $lead->save();
+        
+        return view('confirm', ['lead' => $lead]); 
     }
 }
