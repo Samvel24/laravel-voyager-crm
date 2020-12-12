@@ -27,7 +27,7 @@
                 {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
             </a>
         </div>
-
+        
         {{-- Lockscreen user name --}}
         <div class="lockscreen-name">
             {{ 'Gracias por registrarte ' . $lead->name }}
